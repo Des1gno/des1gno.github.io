@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shravan Anand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap" rel="stylesheet">
+<style>
+/* VOICE everyday-professional: a personal engineering portfolio, calm and exact
+   IDEA a technical drawing sheet: thin frame with zone marks, leader callouts, a title block as footer
+   PICTURE a robot arm in line drawing: upper link carries an FEM stress contour, forearm carries printed ribs
+   COLOUR white sheet, ink #10131a, prussian #0b4f8a for lines and links, carmine #c1121f for the one accent; night #0f1217
+   TYPE Literata 600 display + Literata text
+   LAYOUT name across the top, the drawing full width beneath with a numbered legend; phone: name, drawing, legend stacked */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#0f1217);--ink:light-dark(#10131a,#e8ebf0);--soft:light-dark(#4a5160,#a9b0bd);--line:light-dark(#d5d9e0,#2a303b);--blue:light-dark(#0b4f8a,#7fb3e6);--red:light-dark(#c1121f,#ff6b74);--panel:light-dark(#f4f7fa,#161b23)}
+:root[data-theme=light]{color-scheme:light}
+:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:72px;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.6 Literata,Georgia,serif;overflow-x:clip}
+a{color:var(--blue);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto}
+.band{padding-block:clamp(36px,5vw,72px);padding-left:max(5vw,16px);padding-right:max(5vw,16px)}
+:root[data-lang=en] .de,:root[data-lang=de] .en{display:none}
+nav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;gap:8px 22px;flex-wrap:wrap;padding:10px max(5vw,16px)}
+nav .me{font-weight:600;margin-right:auto;text-decoration:none;color:var(--ink)}
+nav .links{display:flex;gap:4px 18px;flex-wrap:wrap}
+nav .links a{color:var(--soft);text-decoration:none;font-size:15px;padding:8px 0}
+nav .links a:hover{color:var(--ink)}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{font:inherit;font-size:14px;border:0;background:none;color:var(--soft);padding:8px 14px;min-height:40px;cursor:pointer}
+.lang button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+h1{font-size:clamp(40px,6vw,64px);line-height:1.05;letter-spacing:-.02em;margin:0;font-weight:600;text-wrap:balance}
+h2{font-size:clamp(30px,3.6vw,42px);line-height:1.08;letter-spacing:-.02em;margin:0 0 8px;font-weight:600;text-wrap:balance}
+h3{font-size:20px;line-height:1.25;margin:0;font-weight:600}
+.lead{font-size:clamp(18px,2vw,21px);color:var(--soft);max-width:44em;margin:14px 0 0;text-wrap:pretty}
+.sub{color:var(--soft);max-width:62ch;margin:0 0 28px}
+.hero{padding-bottom:20px}
+.sheet{position:relative;margin-top:28px;border:1.5px solid var(--ink);display:grid;grid-template-columns:minmax(0,1fr) 300px}
+.fig{position:relative;aspect-ratio:1000/440;border-right:1px solid var(--line)}
+.fig svg{position:absolute;inset:0;width:100%;height:100%}
+.legend{list-style:none;margin:0;padding:22px 22px;display:grid;gap:16px;align-content:center}
+.legend li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px;font-size:15px;line-height:1.45}
+.legend b{display:block;font-size:16px}
+.legend span.soft{color:var(--soft)}
+.num{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--ink);display:grid;place-items:center;font-size:14px;font-weight:600}
+.facts{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:22px;color:var(--soft);font-size:15px}
+.facts strong{color:var(--ink);font-weight:500}
+section{border-top:1px solid var(--line)}
+.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:clamp(24px,4vw,64px)}
+.about p{margin:0 0 14px;max-width:66ch}
+.tl{margin:8px 0 40px}
+.axis,.row{display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px;align-items:center}
+.axis .ticks{position:relative;height:24px;border-bottom:1px solid var(--ink);font-size:13px;color:var(--soft)}
+.axis .ticks span{position:absolute;bottom:4px;transform:translateX(-50%)}
+.axis .ticks span::after{content:"";position:absolute;left:50%;top:100%;height:6px;border-left:1px solid var(--ink);margin-top:4px}
+.row{padding:7px 0;border-bottom:1px dashed var(--line)}
+.row .lbl{font-size:14.5px;line-height:1.3}
+.row .lbl small{display:block;color:var(--soft);font-size:13px}
+.track{position:relative;height:16px}
+.bar{position:absolute;top:0;height:16px;border-radius:2px;background:var(--blue)}
+.bar.study{background:transparent;border:1.5px solid var(--blue)}
+.bar.now{background:repeating-linear-gradient(-45deg,var(--red) 0 4px,transparent 4px 8px);border:1.5px solid var(--red)}
+.jobs{display:grid;gap:0;border-top:1px solid var(--line)}
+.job{display:grid;grid-template-columns:200px minmax(0,1fr);gap:8px 24px;padding:16px 0;border-bottom:1px solid var(--line);background:none!important;border-radius:0!important;border-left:0!important;border-right:0!important;border-top:0!important}
+.job .co{font-weight:600}.job .co small{display:block;color:var(--soft);font-weight:400;font-size:14px}
+.job .r{font-weight:500}.job .s{color:var(--soft);margin:2px 0 0;font-size:15.5px;max-width:70ch}
+.job details{margin-top:6px;font-size:15px}.job summary{cursor:pointer;color:var(--blue);min-height:32px;display:inline-flex;align-items:center}
+@media(max-width:600px){.job{grid-template-columns:minmax(0,1fr)}}
+.job{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:22px 24px}
+.job .meta{color:var(--soft);font-size:14.5px;margin:4px 0 10px}
+.job ul{margin:0;padding-left:1.1em}
+.job li{margin:4px 0;font-size:15.5px}
+.earlier{margin-top:24px;padding:16px 20px;border-left:2px solid var(--line);color:var(--soft);font-size:15.5px;max-width:80ch}
+.earlier strong{color:var(--ink);font-weight:500}
+.projects{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.feat{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,3vw,44px);align-items:center;padding:28px 0;border-bottom:1px solid var(--line)}
+.feat:first-of-type{padding-top:8px}
+.feat:nth-of-type(even) .gal{order:2}
+.gal{display:grid;gap:10px;grid-template-columns:minmax(0,2fr) minmax(0,1fr)}
+.gal.one{grid-template-columns:minmax(0,1fr)}
+.gal.pair{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gal.pair>figure,.gal.pair>figure+figure{aspect-ratio:3/4}
+.gal.three{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gal.three figure:first-child{grid-column:1/-1;aspect-ratio:16/10}
+.gal figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden;display:grid;place-items:center;aspect-ratio:4/3}
+.gal figure.dark{background:#000}
+.gal figure.tall{aspect-ratio:auto}
+.gal figure{position:relative}
+.gal img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block}
+.gal:not(.three)>figure+figure{aspect-ratio:auto}
+.gal figure.port{aspect-ratio:3/4;max-width:290px;width:100%;justify-self:center}
+.gal figure.cover img{object-fit:cover}
+.gal figure.vid{aspect-ratio:16/9;background:#f6f7f9}
+.gal figure.vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.gal figure.draw.rib{background:var(--panel)}
+.gal figure.draw{background:var(--panel);aspect-ratio:16/9}
+.gal figure.draw svg{width:100%;height:100%}
+.feat h3{font-size:24px;letter-spacing:-.01em}
+.feat .role{color:var(--soft);font-size:15px;margin:4px 0 10px}
+.feat p{margin:0 0 10px;max-width:60ch}
+.feat ul{margin:0 0 10px;padding-left:1.1em}
+.feat li{margin:3px 0}
+.btn{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;background:var(--ink);color:var(--bg);text-decoration:none;font-size:15px;margin:4px 10px 0 0}
+.btn.ghost{background:none;color:var(--ink);border:1px solid var(--ink)}
+.more-proj{margin-top:24px;color:var(--soft);font-size:15.5px;max-width:80ch}
+.proj{border:1px solid var(--line);border-radius:6px;overflow:hidden;display:flex;flex-direction:column}
+.proj .pic{background:var(--panel);border-bottom:1px solid var(--line);aspect-ratio:200/110}
+.proj .pic svg{width:100%;height:100%;display:block}
+.proj .body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.proj .role{color:var(--soft);font-size:14px}
+.proj p{margin:0;font-size:15.5px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+.tags span{font-size:13px;border:1px solid var(--line);border-radius:999px;padding:2px 10px;color:var(--soft)}
+.proj a.more{font-size:14.5px}
+.status{display:inline-block;font-size:13px;color:var(--red);border:1px solid var(--red);border-radius:999px;padding:1px 9px;margin-left:6px;vertical-align:2px;font-weight:500}
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(15em,1fr));gap:22px 32px}
+.skills h3{font-size:17px;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid var(--ink)}
+.skills p{margin:0;font-size:15.5px;color:var(--soft)}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,4vw,64px)}
+.two p{margin:0 0 10px}
+.contact a{font-size:18px}
+.contact ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.contact li span{display:inline-block;width:6.5em;color:var(--soft);font-size:15px}
+footer{padding:0 max(5vw,16px) 40px}
+.tb{max-width:1240px;margin:0 auto;border:1.5px solid var(--ink);display:grid;grid-template-columns:2fr 1fr 1fr 1fr;font-size:14px}
+.tb div{padding:8px 12px;border-left:1px solid var(--ink)}
+.tb div:first-child{border-left:0}
+.tb small{display:block;color:var(--soft);font-size:13px}
+@media(max-width:980px){.projects{grid-template-columns:repeat(2,minmax(0,1fr))}.sheet{grid-template-columns:minmax(0,1fr)}.fig{border-right:0;border-bottom:1px solid var(--line)}.legend{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.about,.two,.jobs,.feat{grid-template-columns:minmax(0,1fr)}.feat:nth-of-type(even) .gal{order:0}.axis,.row{grid-template-columns:120px minmax(0,1fr);gap:10px}.row .lbl small{display:none}}
+@media(max-width:600px){nav .links{display:none}.projects,.legend{grid-template-columns:minmax(0,1fr)}.tb{grid-template-columns:1fr 1fr}.tb div:nth-child(3){border-left:0}.tb div:nth-child(n+3){border-top:1px solid var(--ink)}.axis .ticks span:nth-child(even){display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}#fem{animation:none!important}}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="me" href="#top">Shravan Anand</a>
+  <div class="links">
+    <a href="#about"><span class="en">About</span><span class="de">Über mich</span></a>
+    <a href="#experience"><span class="en">Experience</span><span class="de">Erfahrung</span></a>
+    <a href="#projects"><span class="en">Projects</span><span class="de">Projekte</span></a>
+    <a href="#skills">Skills</a>
+    <a href="#contact"><span class="en">Contact</span><span class="de">Kontakt</span></a>
+  </div>
+  <div class="lang" role="group" aria-label="Language">
+    <button id="l-en" type="button" aria-pressed="true">EN</button>
+    <button id="l-de" type="button" aria-pressed="false">DE</button>
+  </div>
+</div></nav>
+
+<header class="band hero" id="top"><div class="wrap">
+  <h1>Shravan Anand</h1>
+  <p class="lead"><span class="en">Mechatronics graduate with internships, student jobs and my bachelor's thesis at BMW Group and DENSO. Now studying Robotics, Cognition, Intelligence at TUM.</span><span class="de">Mechatronik-Absolvent mit Praktika, Werkstudentenjobs und Bachelorarbeit bei der BMW Group und DENSO. Jetzt im Master Robotics, Cognition, Intelligence an der TUM.</span></p>
+  <div class="sheet">
+    <div class="fig" role="img" aria-label="Line drawing of a robot arm: the upper link shows an FEM stress contour, the forearm carries additive reinforcement ribs.">
+      <svg viewBox="0 0 1000 440" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <defs>
+          <linearGradient id="fem" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0" stop-color="#d7263d"/><stop offset=".22" stop-color="#f29e2e"/><stop offset=".45" stop-color="#f4e04d"/><stop offset=".68" stop-color="#5cc8a8"/><stop offset="1" stop-color="#2f6fd6"/>
+          </linearGradient>
+          <pattern id="mesh" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M0 0H18V18M0 0L18 18" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width=".8"/></pattern>
+          <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="var(--line)" stroke-width=".6"/></pattern>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 1L9 5L0 9" fill="none" stroke="var(--ink)" stroke-width="1.4"/></marker>
+        </defs>
+        <rect width="1000" height="440" fill="url(#grid)" opacity=".7"/>
+        <g font-family="Literata,Georgia,serif" font-size="13" fill="var(--soft)">
+          <text x="250" y="18">1</text><text x="500" y="18">2</text><text x="750" y="18">3</text>
+          <text x="8" y="150">A</text><text x="8" y="300">B</text>
+        </g>
+        <g stroke="var(--ink)" stroke-width="1.6" fill="var(--bg)" stroke-linejoin="round">
+          <line x1="60" y1="400" x2="440" y2="400"/>
+          <g stroke-width=".8" stroke="var(--soft)">
+            <line x1="70" y1="400" x2="58" y2="414"/><line x1="100" y1="400" x2="88" y2="414"/><line x1="130" y1="400" x2="118" y2="414"/><line x1="160" y1="400" x2="148" y2="414"/><line x1="190" y1="400" x2="178" y2="414"/><line x1="220" y1="400" x2="208" y2="414"/><line x1="250" y1="400" x2="238" y2="414"/><line x1="280" y1="400" x2="268" y2="414"/><line x1="310" y1="400" x2="298" y2="414"/><line x1="340" y1="400" x2="328" y2="414"/><line x1="370" y1="400" x2="358" y2="414"/><line x1="400" y1="400" x2="388" y2="414"/><line x1="430" y1="400" x2="418" y2="414"/>
+          </g>
+          <path d="M150 400H290L272 342H168Z"/>
+          <rect x="160" y="324" width="120" height="18" rx="3"/>
+          <g transform="translate(220 300) rotate(-29.5)">
+            <rect x="0" y="-27" width="345" height="54" rx="27" fill="url(#fem)" id="fem"/>
+            <rect x="0" y="-27" width="345" height="54" rx="27" fill="url(#mesh)" stroke="none"/>
+            <rect x="0" y="-27" width="345" height="54" rx="27" fill="none"/>
+            <g stroke-width="1" fill="none">
+              <line x1="0" y1="-34" x2="0" y2="-82"/><line x1="345" y1="-34" x2="345" y2="-82"/>
+              <line x1="4" y1="-74" x2="341" y2="-74" marker-start="url(#ar)" marker-end="url(#ar)"/>
+            </g>
+            <text x="172" y="-82" text-anchor="middle" font-size="15" fill="var(--ink)" stroke="none" font-family="Literata,Georgia,serif">345</text>
+          </g>
+          <g transform="translate(520 130) rotate(21)">
+            <rect x="0" y="-20" width="279" height="40" rx="20"/>
+            <g stroke="var(--red)" stroke-width="2.2">
+              <path d="M40 -20Q50 0 40 20M66 -20Q76 0 66 20M92 -20Q102 0 92 20M118 -20Q128 0 118 20M144 -20Q154 0 144 20M170 -20Q180 0 170 20M196 -20Q206 0 196 20M222 -20Q232 0 222 20" fill="none"/>
+            </g>
+          </g>
+          <circle cx="220" cy="300" r="32"/><circle cx="220" cy="300" r="10"/>
+          <circle cx="520" cy="130" r="26"/><circle cx="520" cy="130" r="8"/>
+          <circle cx="780" cy="230" r="18"/>
+          <path d="M770 246V268L756 300V318M790 246V268L804 300V318" fill="none" stroke-width="2.4"/>
+          <rect x="760" y="318" width="40" height="34" fill="var(--blue)" fill-opacity=".18" stroke="var(--blue)"/>
+          <line x1="680" y1="352" x2="900" y2="352"/>
+          <g stroke-width=".8" stroke="var(--soft)"><line x1="690" y1="352" x2="678" y2="366"/><line x1="720" y1="352" x2="708" y2="366"/><line x1="750" y1="352" x2="738" y2="366"/><line x1="780" y1="352" x2="768" y2="366"/><line x1="810" y1="352" x2="798" y2="366"/><line x1="840" y1="352" x2="828" y2="366"/><line x1="870" y1="352" x2="858" y2="366"/><line x1="900" y1="352" x2="888" y2="366"/></g>
+          <g stroke-dasharray="10 4 2 4" stroke-width=".9" stroke="var(--soft)" fill="none"><line x1="220" y1="250" x2="220" y2="420"/><line x1="780" y1="190" x2="780" y2="372"/></g>
+        </g>
+        <g stroke="var(--ink)" stroke-width="1.1" fill="none">
+          <polyline points="372,214 330,92 300,92"/>
+          <polyline points="652,176 640,62 610,62"/>
+          <polyline points="804,300 900,240 920,240"/>
+          <polyline points="200,320 110,250 92,250"/>
+        </g>
+        <g font-family="Literata,Georgia,serif" font-size="17" font-weight="600" text-anchor="middle" fill="var(--ink)">
+          <circle cx="282" cy="92" r="17" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.5"/><text x="282" y="98">1</text>
+          <circle cx="592" cy="62" r="17" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.5"/><text x="592" y="68">2</text>
+          <circle cx="938" cy="240" r="17" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.5"/><text x="938" y="246">3</text>
+          <circle cx="74" cy="250" r="17" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.5"/><text x="74" y="256">4</text>
+        </g>
+      </svg>
+    </div>
+    <ol class="legend">
+      <li><span class="num">1</span><div><b><span class="en">Structural CAE</span><span class="de">Struktur-CAE</span></b><span class="soft"><span class="en">FEM, shape and topology optimization, full-vehicle simulation at BMW</span><span class="de">FEM, Form- und Topologieoptimierung, Gesamtfahrzeugsimulation bei BMW</span></span></div></li>
+      <li><span class="num">2</span><div><b><span class="en">Additive design</span><span class="de">Additive Konstruktion</span></b><span class="soft"><span class="en">Printed reinforcement ribs (WAAM), the topic of my bachelor's thesis</span><span class="de">Gedruckte Verstärkungsrippen (WAAM), Thema meiner Bachelorarbeit</span></span></div></li>
+      <li><span class="num">3</span><div><b><span class="en">Robotics</span><span class="de">Robotik</span></b><span class="soft"><span class="en">Manipulation, autonomous systems and learning, my focus at TUM</span><span class="de">Manipulation, autonome Systeme und Lernverfahren, mein Fokus an der TUM</span></span></div></li>
+      <li><span class="num">4</span><div><b><span class="en">Mechatronics</span><span class="de">Mechatronik</span></b><span class="soft"><span class="en">Mechanical design, embedded systems and control, from prototypes to production</span><span class="de">Konstruktion, Embedded Systems und Regelung, vom Prototyp zur Serie</span></span></div></li>
+    </ol>
+  </div>
+  <div class="facts">
+    <span><strong>M.Sc.</strong> Robotics, Cognition, Intelligence · TUM</span>
+    <span><strong>B.Eng.</strong> <span class="en">Mechatronics</span><span class="de">Mechatronik</span> · HM</span>
+    <span><strong>roboTUM</strong> · <strong>BMW Group</strong> · <strong>DENSO</strong></span>
+    <span><span class="en">Munich</span><span class="de">München</span></span>
+  </div>
+</div></header>
+
+<section class="band" id="about"><div class="wrap about">
+  <h2><span class="en">About</span><span class="de">Über mich</span></h2>
+  <div>
+    <p class="en">I studied mechatronics at Munich University of Applied Sciences and spent most of that time working alongside my studies. At BMW Group, in chassis development, I designed additively manufactured reinforcements, from the first package study through shape optimization to full-vehicle simulations on the HPC cluster. My bachelor's thesis continued this work and was graded 1.0. A good part of the work was automating the chain in between, with Python, Synera and CATIA macros. Before that, at DENSO, I built and tested HVAC prototypes.</p>
+    <p class="de">Ich habe Mechatronik an der Hochschule München studiert und den Großteil der Zeit nebenbei in der Industrie gearbeitet. Bei der BMW Group habe ich in der Fahrwerksentwicklung additiv gefertigte Verstärkungen konstruiert, von der ersten Bauraumanalyse über die Formoptimierung bis zur Gesamtfahrzeugsimulation auf dem HPC-Cluster. Meine Bachelorarbeit hat daran angeknüpft und wurde mit 1,0 bewertet. Ein guter Teil der Arbeit bestand darin, die Kette dazwischen zu automatisieren, mit Python, Synera und CATIA-Makros. Davor habe ich bei DENSO HVAC-Prototypen aufgebaut und getestet.</p>
+    <p class="en">In my master's at TUM I want to bring that mechanical background into robotics: how robots are designed and built, and how they perceive, learn and move. Outside of lectures I work with the student team roboTUM on RAVEN, a bird-inspired robot that both flies and walks.</p>
+    <p class="de">Im Master an der TUM möchte ich diesen mechanischen Hintergrund in die Robotik einbringen: wie Roboter konstruiert und gebaut werden und wie sie wahrnehmen, lernen und sich bewegen. Neben dem Studium arbeite ich im studentischen Team roboTUM an RAVEN, einem vogelinspirierten Roboter, der fliegen und laufen soll.</p>
+  </div>
+</div></section>
+
+<section class="band" id="experience"><div class="wrap">
+  <h2><span class="en">Experience</span><span class="de">Erfahrung</span></h2>
+  <p class="sub"><span class="en">Studies and work, drawn to time scale.</span><span class="de">Studium und Arbeit, maßstäblich über die Zeit.</span></p>
+  <div class="tl" id="tl"></div>
+  <div class="jobs" id="jobs"></div>
+  <p class="earlier"><strong><span class="en">Earlier.</span><span class="de">Davor.</span></strong>
+    <span class="en">My first look into vehicle development was a school internship at BMW Group in Munich (03–04/2021). Right after, I spent a month on a social internship at the KWA Stift am Parksee retirement home in Unterhaching (04–05/2021). Seeing how hard standing up can be for residents later shaped how I approached Uplift.</span>
+    <span class="de">Meinen ersten Einblick in die Fahrzeugentwicklung bekam ich bei einem Schülerpraktikum bei der BMW Group in München (03–04/2021). Direkt danach war ich einen Monat im Sozialpraktikum im KWA Stift am Parksee in Unterhaching (04–05/2021). Zu sehen, wie schwer vielen Bewohnern das Aufstehen fällt, hat später meinen Blick auf Uplift geprägt.</span></p>
+</div></section>
+
+<section class="band" id="projects"><div class="wrap">
+  <h2><span class="en">Projects</span><span class="de">Projekte</span></h2>
+  <p class="sub"><span class="en">University, team and side projects. Details and files are on <a href="https://github.com/Des1gno">GitHub</a>.</span><span class="de">Studien-, Team- und eigene Projekte. Details und Unterlagen liegen auf <a href="https://github.com/Des1gno">GitHub</a>.</span></p>
+  <div id="feats"></div>
+  <p class="more-proj" id="more-proj"></p>
+</div></section>
+
+<section class="band" id="skills"><div class="wrap">
+  <h2>Skills</h2>
+  <p class="sub"><span class="en">Tools I have used in industry are listed first.</span><span class="de">Werkzeuge aus dem Industrieeinsatz stehen jeweils vorne.</span></p>
+  <div class="skills">
+    <div><h3>CAD</h3><p>CATIA V5 (incl. VBA macros), Solid Edge, Onshape, Fusion 360, Rhino 8</p></div>
+    <div><h3>Simulation &amp; CAE</h3><p>HyperMesh, ANSA, ANSYS, SimSolid, Altair Inspire, InfinitFORM, Rafinex, CAE Bench · <span class="en">FEM, modal analysis, topology and shape optimization</span><span class="de">FEM, Modalanalyse, Topologie- und Formoptimierung</span></p></div>
+    <div><h3><span class="en">Manufacturing</span><span class="de">Fertigung</span></h3><p>WAAM, <span class="en">design for additive manufacturing, distortion and manufacturability assessment, Siemens Process Simulate, FDM printing</span><span class="de">additive Konstruktion, Verzugs- und Fertigbarkeitsbewertung, Siemens Process Simulate, FDM-Druck</span></p></div>
+    <div><h3><span class="en">Programming</span><span class="de">Programmierung</span></h3><p>Python, MATLAB/Simulink, C/C++ (<span class="en">basics</span><span class="de">Grundlagen</span>), Synera, Linux</p></div>
+    <div><h3><span class="en">Electronics &amp; control</span><span class="de">Elektronik &amp; Regelung</span></h3><p>STM32, LTSpice, <span class="en">control engineering</span><span class="de">Regelungstechnik</span></p></div>
+    <div><h3><span class="en">Languages</span><span class="de">Sprachen</span></h3><p><span class="en">German, English and Tamil, all native. Cambridge C1 Advanced (2021). English-taught Electronics course with lab at HM (2023).</span><span class="de">Deutsch, Englisch und Tamil, jeweils Muttersprache. Cambridge C1 Advanced (2021). Englischsprachiger Elektronik-Kurs mit Laborpraktikum an der HM (2023).</span></p></div>
+  </div>
+</div></section>
+
+<section class="band"><div class="wrap two">
+  <div>
+    <h2><span class="en">Outside work</span><span class="de">Außerhalb der Arbeit</span></h2>
+    <p class="en">I play piano, draw, and cook more ambitiously than strictly necessary. My own 3D printer runs most weeks, usually on small DIY builds. I like travelling and have a soft spot for automotive design.</p>
+    <p class="de">Ich spiele Klavier, zeichne und koche ambitionierter als nötig. Mein eigener 3D-Drucker läuft fast jede Woche, meist für kleine DIY-Konstruktionen. Ich reise gern und habe eine Schwäche für Automobildesign.</p>
+  </div>
+  <div class="contact" id="contact">
+    <h2><span class="en">Contact</span><span class="de">Kontakt</span></h2>
+    <ul>
+      <li><span>E-Mail</span><a href="mailto:Shravan.anand@hotmail.com">Shravan.anand@hotmail.com</a></li>
+      <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/shravan-anand-a370b4274/">shravan-anand</a></li>
+      <li><span>GitHub</span><a href="https://github.com/Des1gno">Des1gno</a></li>
+    </ul>
+  </div>
+</div></section>
+
+<footer>
+  <div class="tb">
+    <div><small><span class="en">Name</span><span class="de">Name</span></small>Shravan Anand</div>
+    <div><small><span class="en">Location</span><span class="de">Ort</span></small><span class="en">Munich</span><span class="de">München</span></div>
+    <div><small><span class="en">Revised</span><span class="de">Stand</span></small>11/2026</div>
+    <div><small><span class="en">Sheet</span><span class="de">Blatt</span></small>1 / 1</div>
+  </div>
+</footer>
+
+<script>
+{
+const T0=2022+8/12,T1=2027.5;
+const yr=(y,m)=>y+(m-1)/12;
+const L=o=>o[document.documentElement.dataset.lang]||o.en;
+const rows=[
+  {en:"B.Eng. Mechatronics",de:"B.Eng. Mechatronik",sub:"Hochschule München",a:yr(2022,10),b:yr(2026,9),k:"study"},
+  {en:"DENSO · pre-study internship",de:"DENSO · Vorpraktikum",sub:"Eching",a:yr(2023,7),b:yr(2023,10),k:""},
+  {en:"DENSO · working student",de:"DENSO · Werkstudent",sub:"Eching",a:yr(2024,5),b:yr(2025,2),k:""},
+  {en:"BMW Group · intern",de:"BMW Group · Praktikum",sub:"Garching",a:yr(2025,2),b:yr(2025,7),k:""},
+  {en:"BMW Group · working student",de:"BMW Group · Werkstudent",sub:"Garching",a:yr(2025,6),b:yr(2026,6),k:""},
+  {en:"BMW Group · bachelor's thesis",de:"BMW Group · Bachelorarbeit",sub:"München",a:yr(2026,5),b:yr(2026,11),k:""},
+  {en:"M.Sc. RCI",de:"M.Sc. RCI",sub:"TUM",a:yr(2026,10),b:T1,k:"now"},
+  {en:"roboTUM · RAVEN",de:"roboTUM · RAVEN",sub:"TUM",a:yr(2026,11),b:T1,k:"now"}
+];
+const jobs=[
+  {co:"BMW Group",en:"Bachelor's thesis: design, simulation and optimization",de:"Bachelorand: Konstruktion, Simulation und Optimierung",sum:{en:"WAAM ribs that reinforce a vehicle floor assembly: package and robot-reachability analysis, shape optimization, full-vehicle validation. Graded 1.0.",de:"WAAM-Rippen zur Verstärkung einer Bodengruppe: Bauraum- und Erreichbarkeitsanalyse, Formoptimierung, Gesamtfahrzeugvalidierung. Note 1,0."},when:"05/2026 – 10/2026",
+   b:{en:["Structural design of WAAM ribs that reinforce a vehicle floor assembly","Package, collision and robot-reachability analysis; node-based shape optimization (vertex morphing); full-vehicle validation","A manufacturable rib layout that keeps almost all of the stiffness benefit while saving weight (figures confidential)","Assessment of robotic manufacturability; thesis graded 1.0"],
+      de:["Strukturmechanische Auslegung von WAAM-Rippen zur Verstärkung einer Bodengruppe","Bauraum-, Kollisions- und Erreichbarkeitsanalyse; knotenbasierte Formoptimierung (Vertex Morphing); Gesamtfahrzeugvalidierung","Fertigungsgerechtes Rippenbild, das fast den gesamten Steifigkeitsgewinn behält und Gewicht spart (Zahlen vertraulich)","Bewertung der roboterbasierten Fertigbarkeit; Bachelorarbeit mit 1,0 bewertet"]}},
+  {co:"BMW Group",en:"Working student, R&D chassis development",de:"Werkstudent, F&E Fahrwerksentwicklung",sum:{en:"Additive reinforcement structures, shape optimization and HPC simulations; automated parts of the workflow with Python, Synera and CATIA macros.",de:"Additive Verstärkungsstrukturen, Formoptimierung und HPC-Simulationen; Teile des Workflows mit Python, Synera und CATIA-Makros automatisiert."},when:"06/2025 – 05/2026",
+   b:{en:["Designed additively manufactured reinforcement structures: more stiffness for minimal added weight","Shape optimization with the BMW in-house optimizer and full-vehicle simulations on the HPC cluster (CAE Bench, Linux)","Automated design and simulation workflows in Synera; CATIA V5 macros (VBA) to clean up product structures","Benchmarked and debugged FEM solvers; prepared CAD data for additive manufacturing","Worked directly with manufacturing, simulation and design, including part reviews at Plant Munich and the Additive Manufacturing Campus"],
+      de:["Konstruktion additiver Verstärkungsstrukturen: mehr Steifigkeit bei minimalem Gewichtszuwachs","Formoptimierung mit dem BMW-internen Optimierer und Gesamtfahrzeugsimulationen auf dem HPC-Cluster (CAE Bench, Linux)","Automatisierte Konstruktions- und Simulationsworkflows in Synera; CATIA-V5-Makros (VBA) zur Bereinigung von Produktstrukturen","Benchmarking und Debugging von FEM-Solvern; CAD-Aufbereitung für die additive Fertigung","Direkte Abstimmung mit Fertigung, Simulation und Konstruktion, inkl. Bauteilbegutachtung im Werk München und am Additive Manufacturing Campus"]}},
+  {co:"BMW Group",en:"Engineering intern, R&D chassis",de:"Pflichtpraktikum, F&E Fahrwerk",sum:{en:"FEM analyses, design spaces for topology optimization and Python scripts for load cases.",de:"FEM-Analysen, Bauräume für Topologieoptimierung und Python-Skripte für Lastfälle."},when:"02/2025 – 06/2025",
+   b:{en:["FEM analyses for stiffness, strength and natural frequencies, covering CAD, meshing and simulation","Design spaces for topology optimization and parts designed for additive manufacturing","Automated load case processes with Python","Evaluated SimSolid, InfinitFORM and Rafinex for faster iterations"],
+      de:["FEM-Analysen zu Steifigkeit, Festigkeit und Eigenfrequenzen, von CAD über Vernetzung bis zur Simulation","Bauraumkonzepte für Topologieoptimierungen und fertigungsgerechte Konstruktion für additive Fertigung","Automatisierung von Lastfallprozessen mit Python","Evaluierung von SimSolid, InfinitFORM und Rafinex für schnellere Iterationen"]}},
+  {co:"DENSO Automotive",en:"Working student, thermal design",de:"Werkstudent, Thermal Design",sum:{en:"Assembly concepts and test rig work for HVAC prototypes, plus analysis of the test data.",de:"Montagekonzepte und Prüfstandsarbeit für HVAC-Prototypen sowie Auswertung der Messdaten."},when:"05/2024 – 01/2025",
+   b:{en:["Fixing and assembly concepts for condenser assemblies (inlet/outlet prototypes)","Designed a pin profile that raised torque while reducing friction","Material and wall-thickness tests on test rigs; torque measurements on HVAC door flaps","Data analysis of test series; HVAC prototype handed over to the OEM for further testing"],
+      de:["Fixierungs- und Montagekonzepte für Kondensatorbaugruppen (Inlet/Outlet-Prototypen)","Auslegung eines Stiftprofils für mehr Drehmoment bei weniger Reibung","Material- und Wanddickenprüfung an Prüfmaschinen; Drehmomentvermessung von Türklappen","Auswertung der Messreihen; Übergabe eines HVAC-Prototyps an den OEM zur Weitererprobung"]}},
+  {co:"DENSO Automotive",en:"Engineering intern, thermal design",de:"Vorpraktikum, Thermal Design",sum:{en:"CAD of HVAC components; built and leak-tested a cabin HVAC prototype.",de:"CAD von HVAC-Komponenten; Aufbau und Dichtheitsprüfung eines Cabin-HVAC-Prototyps."},when:"07/2023 – 09/2023",
+   b:{en:["CAD design of HVAC components and door mechanisms","Built and commissioned a cabin HVAC prototype; air and water leakage tests on seal variants","Took part in a value analysis / value engineering (VAVE) workshop"],
+      de:["CAD-Konstruktion von HVAC-Komponenten und Türmechanismen","Aufbau und Inbetriebnahme eines Cabin-HVAC-Prototyps; Luft- und Wasser-Leakage-Tests an Dichtungsvarianten","Teilnahme am Value Analysis / Value Engineering (VAVE) Workshop"]}}
+];
+const S='fill="none" stroke="var(--ink)" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"';
+const pics={
+ thesis:`<svg viewBox="0 0 400 225"><defs><path id="rib" d="M70 168C108 124 168 132 214 142S270 152 292 132" fill="none" stroke-linecap="round" stroke-linejoin="round"/><radialGradient id="arc"><stop offset="0" stop-color="#fff"/><stop offset=".35" stop-color="#bff6ff"/><stop offset="1" stop-color="#5fd3e6" stop-opacity="0"/></radialGradient></defs><path d="M34 62L300 56L378 204L16 208Z" fill="var(--bg)" stroke="var(--ink)" stroke-width="2" stroke-linejoin="round"/><path d="M48 196L362 193" stroke="var(--line)" stroke-width="1"/><g fill="none"><use href="#rib" transform="translate(0 0)" stroke="#2b3038" stroke-width="15"/><use href="#rib" transform="translate(0 0)" stroke="#4c545f" stroke-width="11"/><use href="#rib" transform="translate(0 0)" stroke="#c9ced5" stroke-opacity=".55" stroke-width="2" stroke-dasharray="2 7"/><use href="#rib" transform="translate(0 -6)" stroke="#2b3038" stroke-width="15"/><use href="#rib" transform="translate(0 -6)" stroke="#59616c" stroke-width="11"/><use href="#rib" transform="translate(0 -6)" stroke="#c9ced5" stroke-opacity=".55" stroke-width="2" stroke-dasharray="2 7"/><use href="#rib" transform="translate(0 -12)" stroke="#2b3038" stroke-width="15"/><use href="#rib" transform="translate(0 -12)" stroke="#666e79" stroke-width="11"/><use href="#rib" transform="translate(0 -12)" stroke="#c9ced5" stroke-opacity=".55" stroke-width="2" stroke-dasharray="2 7"/><use href="#rib" transform="translate(0 -18)" stroke="#2b3038" stroke-width="15"/><use href="#rib" transform="translate(0 -18)" stroke="#737b86" stroke-width="11"/><use href="#rib" transform="translate(0 -18)" stroke="#c9ced5" stroke-opacity=".55" stroke-width="2" stroke-dasharray="2 7"/><use href="#rib" transform="translate(0 -24)" stroke="#2b3038" stroke-width="15"/><use href="#rib" transform="translate(0 -24)" stroke="#808893" stroke-width="11"/><use href="#rib" transform="translate(0 -24)" stroke="#c9ced5" stroke-opacity=".55" stroke-width="2" stroke-dasharray="2 7"/><use href="#rib" transform="translate(0 -30)" stroke="#2b3038" stroke-width="15"/><use href="#rib" transform="translate(0 -30)" stroke="#8e96a0" stroke-width="11"/><use href="#rib" transform="translate(0 -30)" stroke="#c9ced5" stroke-opacity=".55" stroke-width="2" stroke-dasharray="2 7"/><use href="#rib" transform="translate(0 -36)" stroke="#2b3038" stroke-width="15"/><use href="#rib" transform="translate(0 -36)" stroke="#9ca4ad" stroke-width="11"/><use href="#rib" transform="translate(0 -36)" stroke="#c9ced5" stroke-opacity=".55" stroke-width="2" stroke-dasharray="2 7"/></g><g transform="translate(292 96)"><circle r="26" fill="url(#arc)"/><path d="M-5 -6L5 -6L14 -70L4 -72Z" fill="#3a4049" stroke="#1d2127" stroke-width="1.2"/><rect x="2" y="-96" width="16" height="26" rx="3" fill="#5a616b" stroke="#1d2127" stroke-width="1.2" transform="rotate(8)"/></g></svg>`,
+
+ raven:`<svg viewBox="0 0 200 110"><g ${S}><ellipse cx="100" cy="50" rx="26" ry="12"/><path d="M126 46L146 40L138 52Z"/><path d="M92 44Q60 10 22 22Q55 34 80 48"/><path d="M108 44Q140 8 178 20" stroke="var(--blue)" stroke-dasharray="4 4"/><path d="M92 62L84 80L94 92M106 62L112 80L104 92"/><path d="M88 92H100M100 92H112"/></g><path d="M150 24A60 60 0 0 1 176 44" fill="none" stroke="var(--red)" stroke-width="1.4" marker-end="url(#ar)"/></svg>`,
+ uplift:`<svg viewBox="0 0 200 110"><g ${S}><path d="M60 95V30H90M140 95V30H110"/><path d="M90 30H110"/><circle cx="60" cy="98" r="5"/><circle cx="140" cy="98" r="5"/><path d="M60 70H140"/><path d="M78 70L100 52L122 70"/><rect x="88" y="44" width="24" height="10" rx="2" fill="var(--blue)" fill-opacity=".2"/></g><path d="M166 80V36" stroke="var(--red)" stroke-width="2" marker-end="url(#ar)"/></svg>`,
+ ball:`<svg viewBox="0 0 200 110"><g ${S}><path d="M40 52L160 40"/><path d="M40 56L160 44"/><path d="M70 54V80M130 48V80"/><circle cx="70" cy="84" r="5"/><circle cx="130" cy="84" r="5"/><path d="M50 95H150"/><path d="M100 51V95"/></g><circle cx="118" cy="36" r="9" fill="var(--red)" fill-opacity=".85"/></svg>`,
+ battery:`<svg viewBox="0 0 200 110"><g ${S}><path d="M20 20L110 55"/><path d="M20 34L104 67"/><path d="M110 55V95M104 67V95"/><path d="M120 70H180V95H120Z"/><path d="M140 70V95M160 70V95"/></g><g fill="var(--blue)" fill-opacity=".25" stroke="var(--blue)" stroke-width="1.4"><rect x="40" y="24" width="22" height="10" rx="3" transform="rotate(21 51 29)"/><rect x="72" y="36" width="22" height="10" rx="3" transform="rotate(21 83 41)"/></g><g stroke="var(--red)" stroke-width="2"><path d="M130 82h0M150 82h0M170 82h0" stroke-linecap="round" stroke-width="6"/></g></svg>`,
+ game:`<svg viewBox="0 0 200 110"><g ${S}><rect x="40" y="20" width="120" height="70" rx="4"/><path d="M60 40H120M80 55H140M60 70H120"/><path d="M40 90L30 100H170L160 90"/></g><circle cx="128" cy="40" r="6" fill="var(--red)"/></svg>`
+};
+const fig=(src,alt,cls="")=>`<figure class="${cls}"><img src="assets/${src}" alt="${alt}"></figure>`;
+const projects=[
+ {gal:`<div class="gal one"><figure class="vid"><video src="assets/raven-lab.mp4" poster="assets/raven-lab-poster.jpg" autoplay muted loop playsinline aria-label="Screen recording of the Wing Kinematics Lab: switching presets and changing twist and span"></video></figure></div>`,now:true,
+  links:[{href:"https://interestingengineering.com/innovation/epfl-bird-inspired-raven-robot",en:"Background: EPFL's RAVEN",de:"Hintergrund: RAVEN der EPFL",ghost:1}],
+  en:{t:"RAVEN: a robot that flies and walks",r:"roboTUM · since 11/2026 · mechatronics, CAD, materials",d:"A bio-inspired robotic raven meant to fly and walk, building on EPFL's RAVEN, but with flapping wings instead of a propeller. To compare wing drives before building hardware, our team made the Wing Kinematics Lab shown in the clip.",l:["Feasibility study on mass, span and jump take-off","Wing Kinematics Lab: an interactive tool our team built to compare flapping drives (gears, rods, wing joints) before committing to hardware"]},
+  de:{t:"RAVEN: ein Roboter, der fliegt und läuft",r:"roboTUM · seit 11/2026 · Mechatronik, CAD, Werkstoffe",d:"Ein bioinspirierter Roboter-Rabe, der fliegen und laufen soll, aufbauend auf EPFLs RAVEN, aber mit Schlagflügeln statt Propeller. Um Flügelantriebe vor dem Bau zu vergleichen, hat unser Team das im Clip gezeigte Wing Kinematics Lab gebaut.",l:["Machbarkeitsstudie zu Masse, Spannweite und Sprungstart","Wing Kinematics Lab: ein interaktives Werkzeug, das wir im Team gebaut haben, um Schlagflügelantriebe (Getriebe, Stangen, Flügelgelenke) vor dem Bau zu vergleichen"]}},
+ {gal:`<div class="gal one"><figure class="draw rib">${pics.thesis}</figure></div>`,
+  links:[{href:"https://newsroom.bmwgroup.com/global/bmw-group-with-live-wire-to-innovative-production-of-vehicle-components-in-waam-process",en:"Background: WAAM at BMW (newsroom)",de:"Hintergrund: WAAM bei BMW (Newsroom)",ghost:1}],
+  en:{t:"Bachelor's thesis: hybrid WAAM floor reinforcement",r:"BMW Group · 2026 · grade 1.0",d:"Steel ribs, welded on layer by layer (WAAM), stiffen the floor assembly of a high-performance vehicle. I reworked an existing rib concept so a welding robot can actually build it, optimized the rib shape with a node-based shape optimizer, and validated the result in the full-vehicle model. The manufacturable design keeps almost all of the stiffness benefit while saving weight. Details and figures are confidential.",l:["Package study, design and shape optimization","Full-vehicle simulation and validation","Robotic manufacturability of the ribs"]},
+  de:{t:"Bachelorarbeit: Bodengruppe im Hybrid-WAAM",r:"BMW Group · 2026 · Note 1,0",d:"Lagenweise aufgeschweißte Stahlrippen (WAAM) versteifen die Bodengruppe eines Hochleistungsfahrzeugs. Ich habe ein bestehendes Rippenkonzept so überarbeitet, dass ein Schweißroboter es tatsächlich fertigen kann, die Rippenform mit einem knotenbasierten Formoptimierer optimiert und das Ergebnis im Gesamtfahrzeugmodell validiert. Das fertigungsgerechte Design behält fast den gesamten Steifigkeitsgewinn und spart dabei Gewicht. Details und Zahlen sind vertraulich.",l:["Bauraumanalyse, Konstruktion und Formoptimierung","Gesamtfahrzeugsimulation und Validierung","Roboterbasierte Fertigbarkeit der Rippen"]}},
+ {gal:`<div class="gal one">${fig("uplift.jpg","Side view of the Uplift standing aid: a walking stick with handle, lever, cable and a fold-out foot plate","port")}</div>`,
+  links:[{href:"https://github.com/Des1gno/Uplift---Semi-Active-Standing-Assistance-Device",en:"View on GitHub",de:"Zum Repository"}],
+  en:{t:"Uplift: semi-active standing aid",r:"Project lead & CAD lead · team of 5 · startup-oriented",d:"A portable walking stick for older people that also helps them stand up. A lever at the handle releases a semi-active support mechanism, and a fold-out foot plate gives a stable base while rising.",l:["Mechanical concept generation and CAD","Prototype optimization and design documentation"]},
+  de:{t:"Uplift: teilaktiver Aufstehstock",r:"Projekt- und CAD-Leitung · 5er-Team · startup-orientiert",d:"Ein tragbarer Gehstock für ältere Menschen, der zugleich beim Aufstehen hilft. Ein Hebel am Griff löst eine teilaktive Stützmechanik aus, eine ausklappbare Fußplatte gibt beim Aufstehen sicheren Stand.",l:["Mechanische Konzeptentwicklung und CAD","Prototypoptimierung und Konstruktionsdokumentation"]}},
+ {gal:`<div class="gal three">${fig("ball-iso.jpg","Ball balancing platform, isometric view of the truss frame with IR sensor strips and the tilting plate")}${fig("ball-joint.jpg","Underside: universal joint in the centre and two servos with lever arms that tilt the plate","cover")}${fig("ball-top.jpg","Ball balancing platform, top view")}</div>`,
+  links:[{href:"https://github.com/Des1gno/ball-balancing-platform",en:"View on GitHub",de:"Zum Repository"}],
+  en:{t:"Ball balancing platform",r:"Mechanical design & CAD · team project",d:"A platform that keeps a ball in place on a tilting plate. IR emitters and phototransistors around the frame locate the ball. Underneath, a universal joint carries the plate, and two servos with lever arms tilt it about both axes under PID control.",l:["Two-axis tilt mechanism: universal joint plus two servo-driven push rods","Truss frame designed for printing and assembly","Integration of sensor strips, servos and electronics"]},
+  de:{t:"Ball-Balancing-Plattform",r:"Konstruktion & CAD · Teamprojekt",d:"Eine Plattform, die eine Kugel auf einer kippbaren Platte in Position hält. IR-Sender und Fototransistoren im Rahmen orten die Kugel. Darunter trägt ein Kardangelenk die Platte, zwei Servos mit Hebelarmen kippen sie mit PID-Regelung um beide Achsen.",l:["Zweiachsige Kippmechanik: Kardangelenk und zwei servogetriebene Schubstangen","Fachwerkrahmen, fertigungsgerecht für Druck und Montage","Integration von Sensorleisten, Servos und Elektronik"]}},
+ {gal:`<div class="gal three">${fig("cya-nozzle.jpg","Concept rendering of the handheld extraction nozzle","cover")}${fig("cya-unit.jpg","Concept sketch of the base unit with water tank, compressor and filter")}${fig("cya-nozzle-notes.jpg","Annotated nozzle concept: LED ring, removable filter, ergonomic handle")}</div>`,
+  en:{t:"Cyanoacrylate fuming & extraction device",r:"Concept design · university project",d:"Forensic investigators use cyanoacrylate fumes to make fingerprints visible. This concept combines a portable base unit (water tank, compressor, water separator with activated carbon filter) with a handheld nozzle that has a distance sensor, LED ring and removable filter."},
+  de:{t:"Cyanacrylat-Bedampfungs- und Absauggerät",r:"Konzeptentwurf · Studienprojekt",d:"In der Spurensicherung machen Cyanacrylat-Dämpfe Fingerabdrücke sichtbar. Das Konzept verbindet eine tragbare Basiseinheit (Wassertank, Kompressor, Wasserabscheider mit Aktivkohlefilter) mit einer Handdüse mit Abstandssensor, LED-Ring und abnehmbarem Filter."}},
+ {gal:`<div class="gal pair">${fig("battery-render.jpg","Battery sorting and charging system: housing shaped like a large battery with AA and AAA openings")}${fig("battery-inside2.jpg","Inside: spiral funnel, sorting stage with stepper motors, display and charging bays")}</div>`,
+  links:[{href:"https://github.com/Des1gno/battery-sorting-and-charging-system",en:"View on GitHub",de:"Zum Repository"}],
+  en:{t:"Battery sorting & charging system",r:"Complete CAD & DFM · KT2 module project",d:"A system that identifies, sorts and charges AA and AAA batteries. Batteries enter at the top, run down a spiral funnel, are measured and sorted by stepper-driven flaps, and end up in charging bays. The housing is shaped like a battery.",l:["Full Solid Edge assembly","Material selection, assembly concept and bill of materials"]},
+  de:{t:"Batteriesortier- und Ladesystem",r:"Komplette CAD & DFM · Modularbeit KT2",d:"Ein System, das AA- und AAA-Batterien erkennt, sortiert und lädt. Die Batterien laufen oben über einen Spiraltrichter ein, werden vermessen, über schrittmotorgetriebene Klappen sortiert und landen in Ladeschächten. Das Gehäuse hat die Form einer Batterie.",l:["Vollständige Solid-Edge-Baugruppe","Werkstoffauswahl, Montagekonzept und Stückliste"]}}
+];
+const pct=t=>((t-T0)/(T1-T0)*100).toFixed(2);
+function render(){
+  const de=document.documentElement.dataset.lang==="de";
+  const years=[2023,2024,2025,2026,2027];
+  document.getElementById("tl").innerHTML=
+    `<div class="axis"><span></span><div class="ticks">${years.map(y=>`<span style="left:${pct(y)}%">${y}</span>`).join("")}</div></div>`+
+    rows.map(r=>`<div class="row"><div class="lbl">${L(r)}<small>${r.sub}</small></div><div class="track"><div class="bar ${r.k}" style="left:${pct(r.a)}%;width:${(pct(r.b)-pct(r.a)).toFixed(2)}%"></div></div></div>`).join("");
+  document.getElementById("jobs").innerHTML=jobs.map(j=>`<article class="job"><div class="co">${j.co}<small>${j.when}</small></div><div><div class="r">${L(j)}</div><p class="s">${L(j.sum)}</p><details><summary>${de?"Details":"Details"}</summary><ul>${L(j.b).map(x=>`<li>${x}</li>`).join("")}</ul></details></div></article>`).join("");
+  document.getElementById("feats").innerHTML=projects.map(p=>{const c=L(p);return `<article class="feat">${p.gal}<div><h3>${c.t}${p.now?`<span class="status">${de?"läuft":"ongoing"}</span>`:""}</h3><div class="role">${c.r}</div><p>${c.d}</p>${(p.links||[]).map((k,i)=>`<a class="btn${i||k.ghost?" ghost":""}" href="${k.href}">${L(k)}</a>`).join("")}</div></article>`}).join("");
+  document.getElementById("more-proj").textContent=de?"Außerdem: das Bauraumkonzept eines selbstregulierenden Kugelspiels.":"Also: the design space concept for a self-regulating ball game.";
+}
+function setLang(l){
+  document.documentElement.dataset.lang=l;document.documentElement.lang=l;
+  document.getElementById("l-en").setAttribute("aria-pressed",l==="en");
+  document.getElementById("l-de").setAttribute("aria-pressed",l==="de");
+  try{localStorage.setItem("sa-lang",l)}catch(e){}
+  render();
+}
+document.getElementById("l-en").addEventListener("click",()=>setLang("en"));
+document.getElementById("l-de").addEventListener("click",()=>setLang("de"));
+let start="en";
+try{start=localStorage.getItem("sa-lang")||((navigator.language||"").startsWith("de")?"de":"en")}catch(e){}
+setLang(start);
+}
+</script>
+</body>
+</html>
