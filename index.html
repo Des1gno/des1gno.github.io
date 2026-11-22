@@ -211,18 +211,18 @@ footer{padding:0 max(5vw,16px) 40px}
           <polyline points="200,320 110,250 92,250"/>
         </g>
         <g font-family="Literata,Georgia,serif" font-size="17" font-weight="600" text-anchor="middle" fill="var(--ink)">
-          <circle cx="282" cy="92" r="17" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.5"/><text x="282" y="98">1</text>
-          <circle cx="592" cy="62" r="17" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.5"/><text x="592" y="68">2</text>
-          <circle cx="938" cy="240" r="17" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.5"/><text x="938" y="246">3</text>
-          <circle cx="74" cy="250" r="17" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.5"/><text x="74" y="256">4</text>
+          <circle cx="282" cy="92" r="17" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.5"/><text x="282" y="98">2</text>
+          <circle cx="592" cy="62" r="17" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.5"/><text x="592" y="68">3</text>
+          <circle cx="938" cy="240" r="17" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.5"/><text x="938" y="246">4</text>
+          <circle cx="74" cy="250" r="17" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.5"/><text x="74" y="256">1</text>
         </g>
       </svg>
     </div>
     <ol class="legend">
-      <li><span class="num">1</span><div><b><span class="en">Structural CAE</span><span class="de">Struktur-CAE</span></b><span class="soft"><span class="en">FEM, shape and topology optimization, full-vehicle simulation at BMW</span><span class="de">FEM, Form- und Topologieoptimierung, Gesamtfahrzeugsimulation bei BMW</span></span></div></li>
-      <li><span class="num">2</span><div><b><span class="en">Additive design</span><span class="de">Additive Konstruktion</span></b><span class="soft"><span class="en">Printed reinforcement ribs (WAAM), the topic of my bachelor's thesis</span><span class="de">Gedruckte Verstärkungsrippen (WAAM), Thema meiner Bachelorarbeit</span></span></div></li>
-      <li><span class="num">3</span><div><b><span class="en">Robotics</span><span class="de">Robotik</span></b><span class="soft"><span class="en">Manipulation, autonomous systems and learning, my focus at TUM</span><span class="de">Manipulation, autonome Systeme und Lernverfahren, mein Fokus an der TUM</span></span></div></li>
-      <li><span class="num">4</span><div><b><span class="en">Mechatronics</span><span class="de">Mechatronik</span></b><span class="soft"><span class="en">Mechanical design, embedded systems and control, from prototypes to production</span><span class="de">Konstruktion, Embedded Systems und Regelung, vom Prototyp zur Serie</span></span></div></li>
+      <li><span class="num">1</span><div><b><span class="en">Mechatronics</span><span class="de">Mechatronik</span></b><span class="soft"><span class="en">Mechanical design, embedded systems and control, from prototypes to production</span><span class="de">Konstruktion, Embedded Systems und Regelung, vom Prototyp zur Serie</span></span></div></li>
+      <li><span class="num">2</span><div><b><span class="en">Structural CAE</span><span class="de">Struktur-CAE</span></b><span class="soft"><span class="en">FEM, shape and topology optimization, full-vehicle simulation at BMW</span><span class="de">FEM, Form- und Topologieoptimierung, Gesamtfahrzeugsimulation bei BMW</span></span></div></li>
+      <li><span class="num">3</span><div><b><span class="en">Additive design</span><span class="de">Additive Konstruktion</span></b><span class="soft"><span class="en">Printed reinforcement ribs (WAAM), the topic of my bachelor's thesis</span><span class="de">Gedruckte Verstärkungsrippen (WAAM), Thema meiner Bachelorarbeit</span></span></div></li>
+      <li><span class="num">4</span><div><b><span class="en">Robotics</span><span class="de">Robotik</span></b><span class="soft"><span class="en">Manipulation, autonomous systems and learning, my focus at TUM</span><span class="de">Manipulation, autonome Systeme und Lernverfahren, mein Fokus an der TUM</span></span></div></li>
     </ol>
   </div>
   <div class="facts">
@@ -257,7 +257,6 @@ footer{padding:0 max(5vw,16px) 40px}
   <h2><span class="en">Projects</span><span class="de">Projekte</span></h2>
   <p class="sub"><span class="en">University, team and side projects. Details and files are on <a href="https://github.com/Des1gno">GitHub</a>.</span><span class="de">Studien-, Team- und eigene Projekte. Details und Unterlagen liegen auf <a href="https://github.com/Des1gno">GitHub</a>.</span></p>
   <div id="feats"></div>
-  <p class="more-proj" id="more-proj"></p>
 </div></section>
 
 <section class="band" id="skills"><div class="wrap">
@@ -359,8 +358,8 @@ const projects=[
   en:{t:"Ball balancing platform",r:"Mechanical design & CAD · team project",d:"A platform that keeps a ball in place on a tilting plate. IR emitters and phototransistors around the frame locate the ball. Underneath, a universal joint carries the plate, and two servos with lever arms tilt it about both axes under PID control.",l:["Two-axis tilt mechanism: universal joint plus two servo-driven push rods","Truss frame designed for printing and assembly","Integration of sensor strips, servos and electronics"]},
   de:{t:"Ball-Balancing-Plattform",r:"Konstruktion & CAD · Teamprojekt",d:"Eine Plattform, die eine Kugel auf einer kippbaren Platte in Position hält. IR-Sender und Fototransistoren im Rahmen orten die Kugel. Darunter trägt ein Kardangelenk die Platte, zwei Servos mit Hebelarmen kippen sie mit PID-Regelung um beide Achsen.",l:["Zweiachsige Kippmechanik: Kardangelenk und zwei servogetriebene Schubstangen","Fachwerkrahmen, fertigungsgerecht für Druck und Montage","Integration von Sensorleisten, Servos und Elektronik"]}},
  {gal:`<div class="gal three">${fig("cya-nozzle.jpg","Concept rendering of the handheld extraction nozzle","cover")}${fig("cya-unit.jpg","Concept sketch of the base unit with water tank, compressor and filter")}${fig("cya-nozzle-notes.jpg","Annotated nozzle concept: LED ring, removable filter, ergonomic handle")}</div>`,
-  en:{t:"Cyanoacrylate fuming & extraction device",r:"Concept design · university project",d:"Forensic investigators use cyanoacrylate fumes to make fingerprints visible. This concept combines a portable base unit (water tank, compressor, water separator with activated carbon filter) with a handheld nozzle that has a distance sensor, LED ring and removable filter."},
-  de:{t:"Cyanacrylat-Bedampfungs- und Absauggerät",r:"Konzeptentwurf · Studienprojekt",d:"In der Spurensicherung machen Cyanacrylat-Dämpfe Fingerabdrücke sichtbar. Das Konzept verbindet eine tragbare Basiseinheit (Wassertank, Kompressor, Wasserabscheider mit Aktivkohlefilter) mit einer Handdüse mit Abstandssensor, LED-Ring und abnehmbarem Filter."}},
+  en:{t:"Cyanoacrylate fuming & extraction device",r:"Concept design · team of 5 · university project",d:"Forensic investigators use cyanoacrylate fumes to make fingerprints visible. This concept combines a portable base unit (water tank, compressor, water separator with activated carbon filter) with a handheld nozzle that has a distance sensor, LED ring and removable filter."},
+  de:{t:"Cyanacrylat-Bedampfungs- und Absauggerät",r:"Konzeptentwurf · 5er-Team · Studienprojekt",d:"In der Spurensicherung machen Cyanacrylat-Dämpfe Fingerabdrücke sichtbar. Das Konzept verbindet eine tragbare Basiseinheit (Wassertank, Kompressor, Wasserabscheider mit Aktivkohlefilter) mit einer Handdüse mit Abstandssensor, LED-Ring und abnehmbarem Filter."}},
  {gal:`<div class="gal pair">${fig("battery-render.jpg","Battery sorting and charging system: housing shaped like a large battery with AA and AAA openings")}${fig("battery-inside2.jpg","Inside: spiral funnel, sorting stage with stepper motors, display and charging bays")}</div>`,
   links:[{href:"https://github.com/Des1gno/battery-sorting-and-charging-system",en:"View on GitHub",de:"Zum Repository"}],
   en:{t:"Battery sorting & charging system",r:"Complete CAD & DFM · KT2 module project",d:"A system that identifies, sorts and charges AA and AAA batteries. Batteries enter at the top, run down a spiral funnel, are measured and sorted by stepper-driven flaps, and end up in charging bays. The housing is shaped like a battery.",l:["Full Solid Edge assembly","Material selection, assembly concept and bill of materials"]},
@@ -375,7 +374,6 @@ function render(){
     rows.map(r=>`<div class="row"><div class="lbl">${L(r)}<small>${r.sub}</small></div><div class="track"><div class="bar ${r.k}" style="left:${pct(r.a)}%;width:${(pct(r.b)-pct(r.a)).toFixed(2)}%"></div></div></div>`).join("");
   document.getElementById("jobs").innerHTML=jobs.map(j=>`<article class="job"><div class="co">${j.co}<small>${j.when}</small></div><div><div class="r">${L(j)}</div><p class="s">${L(j.sum)}</p><details><summary>${de?"Details":"Details"}</summary><ul>${L(j.b).map(x=>`<li>${x}</li>`).join("")}</ul></details></div></article>`).join("");
   document.getElementById("feats").innerHTML=projects.map(p=>{const c=L(p);return `<article class="feat">${p.gal}<div><h3>${c.t}${p.now?`<span class="status">${de?"läuft":"ongoing"}</span>`:""}</h3><div class="role">${c.r}</div><p>${c.d}</p>${(p.links||[]).map((k,i)=>`<a class="btn${i||k.ghost?" ghost":""}" href="${k.href}">${L(k)}</a>`).join("")}</div></article>`}).join("");
-  document.getElementById("more-proj").textContent=de?"Außerdem: das Bauraumkonzept eines selbstregulierenden Kugelspiels.":"Also: the design space concept for a self-regulating ball game.";
 }
 function setLang(l){
   document.documentElement.dataset.lang=l;document.documentElement.lang=l;
